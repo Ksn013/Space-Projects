@@ -55,14 +55,14 @@ class SatelliteTracker:
         """Создаем интерактивную карту с треком спутника"""
         m = folium.Map(location=[lat, lon], zoom_start=3)
         
-        # Добавляем маркер текущей позиции
+        # Добавление маркера текущей позиции ка
         folium.Marker(
             [lat, lon],
             popup=f"Спутник {self.SATELLITE_NAME}",
             icon=folium.Icon(color='red', icon='satellite')
         ).add_to(m)
         
-        # Добавляем трек из истории (если есть)
+        # Добавление трека из истории 
         if len(self.positions_history) > 1:
             track = [[p[1], p[2]] for p in self.positions_history]
             folium.PolyLine(
@@ -116,9 +116,5 @@ class SatelliteTracker:
             print("\nОтслеживание остановлено.")
 
 if __name__ == "__main__":
-    # Пример 
-    TLE_LINE1 = "1 64750U 25144AC  25192.25002315 -.01375670  00000-0 -59479-2 0  9992"
-    TLE_LINE2 = "2 64750  53.1535 228.7163 0000829  90.1939 125.2795 15.86986143  2650"
-    
     tracker = SatelliteTracker(TLE_LINE1, TLE_LINE2, "ISS STARLINK-34531")
     tracker.track_satellite(update_interval=300)  # Обновление каждые 300 секунд
