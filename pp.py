@@ -22,7 +22,6 @@ GRID_COLOR = (50, 50, 80)
 CONSTELLATION_COLOR = (100, 100, 255)
 
 
-# ========== ФУНКЦИИ ПРЕОБРАЗОВАНИЯ КООРДИНАТ ==========
 def equatorial_to_screen(ra, dec, time_offset=0):
     """Конвертирует экваториальные координаты в экранные"""
     current_time = datetime.now(pytz.utc)
@@ -37,9 +36,8 @@ def equatorial_to_screen(ra, dec, time_offset=0):
     return (WIDTH / 2 + x * scale, HEIGHT / 2 + y * scale)
 
 
-# ========== ФУНКЦИИ ЗАГРУЗКИ ДАННЫХ ==========
 def load_stars():
-    """Возвращает список звезд в формате (name, ra, dec, mag, color)"""
+    """Возвращает список звезд (name, ra, dec, mag, color)"""
     stars = [
         ("Sun", 0, 0, -26.74, YELLOW),
         ("Sirius", 6.75, -16.72, -1.46, WHITE),
@@ -56,7 +54,7 @@ def load_stars():
 
 
 def load_planets():
-    """Возвращает список планет в формате (name, ra, dec, mag, color, size, orbit_r, orbit_p)"""
+    """Возвращает список планет (name, ra, dec, mag, color, size, orbit_r, orbit_p)"""
     return [
         ("Mercury", 0, 0, -0.4, (200, 200, 200), 3, 0.4, 88),
         ("Venus", 0, 0, -4.6, (255, 255, 200), 5, 0.7, 225),
@@ -81,7 +79,6 @@ def load_constellations():
     }
 
 
-# ========== КЛАСС КАМЕРЫ ==========
 class Camera:
     def __init__(self):
         self.zoom = 1.0
@@ -100,7 +97,6 @@ class Camera:
         self.zoom = zoom_level
 
 
-# ========== ФУНКЦИИ ОТРИСОВКИ ==========
 def draw_earth(x, y, size):
     """Рисует модель Земли"""
     earth = pygame.Surface((size * 2, size * 2), pygame.SRCALPHA)
@@ -118,7 +114,7 @@ def draw_grid():
         pygame.draw.line(screen, GRID_COLOR, (0, i), (WIDTH, i), 1)
 
 
-# ========== ОСНОВНАЯ ФУНКЦИЯ ==========
+#
 def main():
     stars = load_stars()
     planets = load_planets()
@@ -244,3 +240,4 @@ def main():
 if __name__ == "__main__":
     main()
     pygame.quit()
+
